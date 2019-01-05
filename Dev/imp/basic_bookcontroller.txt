@@ -1,0 +1,123 @@
+package controllers;
+
+import com.fasterxml.jackson.databind.JsonNode;
+import module.Book;
+
+import org.h2.util.New;
+import play.libs.Json;
+import play.mvc.Controller;
+import play.mvc.Result;
+
+import java.util.HashMap;
+import java.util.Map;
+
+public class BookController extends Controller {
+
+    Integer index = 0;
+    final Map<Integer, Book> books = new HashMap<>();
+
+
+    public Result createBook() {
+
+        final JsonNode json = request().body().asJson();
+
+        final Book book = Json.fromJson(json , Book.class);
+
+        if(null == book.getTitle()) {
+
+            return badRequest();
+        }
+
+        book.setId(index++);
+
+        books.put(book.getId() , book);
+
+        final JsonNode result = Json.toJson(books.values());
+
+        return  ok(result);
+    }
+
+
+    public Result getBookById(Integer id) {
+
+        if(null == id) {
+
+            return badRequest("Enter the proper id");
+        }
+
+        final Book book = books.get(id);
+
+        if(null == book) {
+             return  badRequest("doesn't have a title");
+        }
+
+        final JsonNode result = Json.toJson(book);
+
+        return  ok(result);
+    }
+
+
+    public Result updateBookById(Integer id) {
+
+        if(null == id) {
+
+            return badRequest("Enter the proper id");
+        }
+
+
+        final Book existingbook = books.get(id);
+
+        if(null == existingbook) {
+
+            return badRequest("Book doesn't exists");
+        }
+
+        final JsonNode json = request().body().asJson();
+
+        final Book newbook = Json.fromJson(json , Book.class);
+
+        if(null == newbook.getTitle()){
+
+            return badRequest("title not availaable");
+        }
+
+        existingbook.setTitle(newbook.getTitle());
+
+        books.put(existingbook.getId(),existingbook);
+
+        final JsonNode result = Json.toJson(books.values());
+
+        return  ok(result);
+    }
+
+
+    public Result deleteBookById(Integer id) {
+
+        if(null == id) {
+
+            return badRequest("Enter the proper id");
+        }
+
+
+        final Book existingbook = books.get(id);
+
+        if(null == existingbook) {
+
+            return badRequest("Book doesn't exists");
+        }
+
+        books.remove(id);
+
+        final JsonNode result = Json.toJson(books.values());
+
+        return  ok(result);
+    }
+
+
+    public Result getAllBooks() {
+
+        final JsonNode result = Json.toJson(books.values());
+
+        return  ok(result);
+    }
+}
