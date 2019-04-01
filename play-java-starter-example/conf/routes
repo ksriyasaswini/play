@@ -2,22 +2,36 @@
 # This file defines all application routes (Higher priority routes first)
 # ~~~~
 
-GET /hello                           controllers.HelloWorldController.helloWorld
-GET /hello/:name                     controllers.HelloWorldController.hello(name:String)
-GET /hello/sri                       controllers.HelloWorldController.hellosri
-GET /hellos/:name                    controllers.HelloWorldController.hellos(name:String,count:Integer?=0)
+#POST /books              controllers.BookController.createBook()
+#GET  /books/:id          controllers.BookController.getBookById(id: Integer)
+#PUT  /books/:id          controllers.BookController.updateBookById(id: Integer)
+#DELETE /books/:id        controllers.BookController.deleteBookById(id: Integer)
+#GET  /books              controllers.BookController.getAllBooks()
 
-POST /greeting                       controllers.HelloWorldController.greeting
+GET /helloWorld          controllers.HelloWorldController.helloWorld()
+GET /hello/:name         controllers.HelloWorldController.hello(name: String)
+GET /hello2/:name        controllers.HelloWorldController.hello2(name: String,count: Integer?=0)
+POST /greetings          controllers.HelloWorldController.greetings()
+GET /me                  controllers.HelloWorldController.me()
 
-GET /me                              controllers.HelloWorldController.me
+
+POST /register              controllers.UserController.createUserDetails()
+PUT /signIn               controllers.UserController.signInUser(username: String, password: String)
+PUT /signOut              controllers.UserController.signOutUser(token: String)
+#DELETE  /login/:id          controllers.UserController.deleteValuesById(id: Integer)
+#GET  /login              controllers.UserController.getAllValues()
+#GET  /login/:id          controllers.UserController.getValuesById(id: Integer)
 
 
-POST /books              controllers.BookController.createBook()
-GET  /books/:id          controllers.BookController.getBookById(id: Integer)
-PUT  /books/:id          controllers.BookController.updateBookById(id: Integer)
-DELETE /books/:id        controllers.BookController.deleteBookById(id: Integer)
-GET  /books              controllers.BookController.getAllBooks()
 
+POST /images             controllers.ImagesController.uploadImage()
+GET  /images         controllers.ImagesController.downloadImage(id: String)
+DELETE /images/:id       controllers.ImagesController.deleteImage(id: String)
+
+
+POST /details             controllers.RestaurantController.createRestaurant()
+GET  /details             controllers.RestaurantController.getAllRestaurants()
+GET  /search             controllers.RestaurantController.getRestaurantByName(name: String)
 
 
 # An example controller showing a sample home page
@@ -29,3 +43,5 @@ GET     /message                    controllers.AsyncController.message
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)
+
+

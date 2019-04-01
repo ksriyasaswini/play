@@ -1,11 +1,9 @@
 import com.google.inject.AbstractModule;
+import dao.*;
+import services.*;
+
 import java.time.Clock;
 
-import services.ApplicationTimer;
-import services.AtomicCounter;
-import services.Counter;
-
-import Doas.*;
 /**
  * This class is a Guice module that tells Guice how to bind several
  * different types. This Guice module is created when the Play
@@ -21,7 +19,11 @@ public class Module extends AbstractModule {
     @Override
     public void configure() {
 
+
         bind(BookDao.class).to(BookDaoImpl.class);
+        bind(RestaurantDao.class).to(RestaurantDaoImpl.class);
+
+        bind(ImageStore.class).to(ImageStoreImpl.class);
         //bind(BookDao.class).to(FakeBookDao.class);
         // Use the system clock as the default implementation of Clock
         bind(Clock.class).toInstance(Clock.systemDefaultZone());
@@ -30,6 +32,8 @@ public class Module extends AbstractModule {
         bind(ApplicationTimer.class).asEagerSingleton();
         // Set AtomicCounter as the implementation for Counter.
         bind(Counter.class).to(AtomicCounter.class);
+        bind(UserDao.class).to(UserDaoImpl.class);
+
     }
 
 }
