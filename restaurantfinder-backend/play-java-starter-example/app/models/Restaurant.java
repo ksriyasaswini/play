@@ -19,19 +19,43 @@ public class Restaurant {
 
     @Basic
     @JsonProperty("name")
-    private String Name;
+    private String name;
 
     @Basic
     @JsonProperty("address")
-    private String Address;
+    private String address;
 
     @Basic
     @JsonProperty("phno")
-    private String PhNo;
+    private String phno;
 
     @Basic
     @JsonProperty("workinghrs")
-    private String WorkingHrs;
+    private String workinghrs;
+
+    @Basic
+    @JsonProperty("cost")
+    private String cost;
+
+    @Basic
+    @JsonProperty("cuisines")
+    private String[] cuisines;
+
+    @Basic
+    @JsonProperty("featured_in")
+    private String[] featured_in;
+
+    @Basic
+    @JsonProperty("type")
+    private String type;
+
+    @Basic
+    @JsonProperty("latitude")
+    private float latitude;
+
+    @Basic
+    @JsonProperty("longitude")
+    private float longitude;
 
     @Transient
     @JsonIgnore
@@ -46,12 +70,19 @@ public class Restaurant {
     public Restaurant() {
     }
 
-    public Restaurant(Integer id, String name, String address, String phNo, String workingHrs, String[] menuUrls, String[] imageUrls) {
-        Id = id;
-        Name = name;
-        Address = address;
-        PhNo = phNo;
-        WorkingHrs = workingHrs;
+
+    public Restaurant(Integer res_id, String name, String address, String phno, String workinghrs, String cost, String[] cuisines, String[] featured_in, String type, float latitude, float longitude, String[] menuUrls, String[] imageUrls) {
+        this.Id = res_id;
+        this.name = name;
+        this.address = address;
+        this.phno = phno;
+        this.workinghrs = workinghrs;
+        this.cost = cost;
+        this.cuisines = cuisines;
+        this.featured_in = featured_in;
+        this.type = type;
+        this.latitude = latitude;
+        this.longitude = longitude;
         this.menuUrls = menuUrls;
         this.imageUrls = imageUrls;
     }
@@ -65,35 +96,83 @@ public class Restaurant {
     }
 
     public String getName() {
-        return Name;
+        return name;
     }
 
     public void setName(String name) {
-        Name = name;
+        this.name = name;
     }
 
     public String getAddress() {
-        return Address;
+        return address;
     }
 
     public void setAddress(String address) {
-        Address = address;
+        this.address = address;
     }
 
-    public String getPhNo() {
-        return PhNo;
+    public String getPhno() {
+        return phno;
     }
 
-    public void setPhNo(String phNo) {
-        PhNo = phNo;
+    public void setPhno(String phno) {
+        this.phno = phno;
     }
 
-    public String getWorkingHrs() {
-        return WorkingHrs;
+    public String getWorkinghrs() {
+        return workinghrs;
     }
 
-    public void setWorkingHrs(String workingHrs) {
-        WorkingHrs = workingHrs;
+    public void setWorkinghrs(String workinghrs) {
+        this.workinghrs = workinghrs;
+    }
+
+    public String getCost() {
+        return cost;
+    }
+
+    public void setCost(String cost) {
+        this.cost = cost;
+    }
+
+    public String[] getCuisines() {
+        return cuisines;
+    }
+
+    public void setCuisines(String[] cuisines) {
+        this.cuisines = cuisines;
+    }
+
+    public String[] getFeatured_in() {
+        return featured_in;
+    }
+
+    public void setFeatured_in(String[] featured_in) {
+        this.featured_in = featured_in;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public float getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(float latitude) {
+        this.latitude = latitude;
+    }
+
+    public float getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(float longitude) {
+        this.longitude = longitude;
     }
 
     public String[] getMenuUrls() {

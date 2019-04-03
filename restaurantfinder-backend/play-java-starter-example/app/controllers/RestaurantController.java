@@ -17,6 +17,7 @@ import play.mvc.Result;
 import javax.inject.Inject;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 
 public class RestaurantController extends Controller {
@@ -68,6 +69,20 @@ public class RestaurantController extends Controller {
 
 
         final JsonNode result = Json.toJson(newrestaurant);
+        return ok(result);
+    }
+
+    @Transactional
+    public Result getRestaurantByLocation (Double lat,Double lng) {
+
+        if (null == lat){
+            return badRequest("latitude must be provided");
+        }
+
+        final Collection<Restaurant> restaurants = restaurantDao.findRestaurantByLocation(lat, lng);
+
+        final JsonNode result = Json.toJson(restaurants);
+
         return ok(result);
     }
 
@@ -126,6 +141,28 @@ public class RestaurantController extends Controller {
         final JsonNode result = Json.toJson(restaurantArrayList);
 
         return ok(result);
+    }
+    @Transactional
+    public Result getFilteredRestaurants() {
+
+        final JsonNode json = request().body().asJson();
+
+
+
+        final String type = json.get("type").asText();
+
+        //final List<String> cuisines =json.get("cuisines").findValuesAsText("cuisines");
+        final String sort=json.get("sort").asText();
+        final String time=json.get("open").asText();
+
+
+        LOGGER.debug("type {}",type);
+      //  LOGGER.debug("cuisines {}", cuisines);
+        LOGGER.debug("sort {}", sort);
+        LOGGER.debug("time {}", time);
+
+
+        return ok();
     }
 
 

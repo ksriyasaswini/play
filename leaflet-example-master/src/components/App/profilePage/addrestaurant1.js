@@ -14,7 +14,8 @@ class addRestaurant1 extends React.Component {
           phoneNumber: '',
           address:'',
           imageUrls:[],
-          menuUrls:[]
+          menuUrls:[],
+          lat:""
       },
       fields:{},
       errors: {},
@@ -29,9 +30,13 @@ class addRestaurant1 extends React.Component {
       this.submitSellForm = this.submitSellForm.bind(this);
       this._handleSubmit = this._handleSubmit.bind(this);
       //this.handleSubmit = this.handleSubmit.bind(this);
+      this.getData = this.getData.bind(this);
       this._handleImageChange = this._handleImageChange.bind(this);
       this._handleMenuImageChange = this._handleMenuImageChange.bind(this);
       this._handleMenuSubmit = this._handleMenuSubmit.bind(this);
+    }
+    getData(val) {
+      console.log(val)
     }
 
     _handleSubmit(e) {
@@ -209,6 +214,7 @@ class addRestaurant1 extends React.Component {
   }
 
 
+
   submitSellForm(e) {
     console.log("imags",this.state.img)
     console.log("imags",this.state.img1)
@@ -328,7 +334,8 @@ class addRestaurant1 extends React.Component {
 const { form} = this.state;
     return (
       <div>
-      
+      {console.log("la.......",this.props.latiVal)}
+      {console.log("log....",this.state.longiVal)}
       <div class ="container">
       <div class="card">
         <div class="card-body px-lg-6 pt-0" >
@@ -350,7 +357,7 @@ const { form} = this.state;
    <div className="errorMsg">{this.state.errors.address}</div>
    </div>
    <div className="md-form">
-   <MapRender/>
+   <MapRender sendData = {this.getData}/>
    </div>
    <div class="md-form">
    <label for="inputIconEx4">phoneNumber</label>

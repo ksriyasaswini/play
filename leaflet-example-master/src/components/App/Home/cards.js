@@ -73,6 +73,7 @@ class Cards extends React.Component {
              
               
             <Card width="100%">              
+            {console.log(RestaurantDetails.imageUrls)}
                <CardImg top width="100%" src={RestaurantDetails.imageUrls[0]} alt="Card image cap" height="200px"/> 
               <CardBody>  
                    <div key={index}>  

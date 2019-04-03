@@ -93,4 +93,27 @@ public class RestaurantDaoImpl implements RestaurantDao{
         return restaurants;
     }
 
+    @Override
+    public Collection<Restaurant> findRestaurantByLocation(Double lat, Double lng) {
+
+        final String queryString = "SELECT r from Restaurant r where (6371 * acos(cos( radians("+lat+") ) * cos( radians( r.Latitude ) ) * cos( radians( r.Longitude ) - radians("+lng+") ) + sin( radians(37) ) * sin( radians( r.Latitude ) ) ) ) < 2500000000";
+
+        LOGGER.error("query {}", queryString);
+
+        TypedQuery<Restaurant> query = jpaApi.em().createQuery(queryString, Restaurant.class);
+
+        List<Restaurant> restaurants= query.getResultList();
+
+
+
+        return restaurants;
+
+//return null;
+
+    }
+
+    @Override
+    public Collection<Restaurant> findRestaurantByFilters(String type, String[] cost, String[] cuisines, Integer Sort,String Open) {
+        return null;
+    }
 }
